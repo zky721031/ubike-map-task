@@ -11,6 +11,7 @@ import 'react-leaflet-markercluster/styles';
 import './map.css';
 
 import mapPin from '../../assets/map-pin-solid.svg';
+import ubikePin from '../../assets/map-marker-alt-solid.svg';
 // import data from '../data/data.json';
 // console.log(data);
 
@@ -20,6 +21,11 @@ const TILE_LAYER_URL = `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z
 
 const CUSTOM_ICONS = new Icon({
   iconUrl: mapPin,
+  iconSize: [30, 34],
+});
+
+const UBIKE_ICONS = new Icon({
+  iconUrl: ubikePin,
   iconSize: [30, 34],
 });
 
@@ -144,6 +150,7 @@ export default function Map({ positions }) {
               <Marker
                 key={each.sna}
                 position={[each.latitude, each.longitude]}
+                icon={UBIKE_ICONS}
                 eventHandlers={{
                   click: () => changeCenter(each),
                   mouseover: (event) => event.target.openPopup(),
