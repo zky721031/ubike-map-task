@@ -4,7 +4,6 @@ import { Select, message } from 'antd';
 import L, { Icon } from 'leaflet';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-
 import 'leaflet/dist/leaflet.css';
 import 'react-leaflet-markercluster/styles';
 
@@ -12,8 +11,6 @@ import './map.css';
 
 import mapPin from '../../assets/map-pin-solid.svg';
 import ubikePin from '../../assets/map-marker-alt-solid.svg';
-// import data from '../data/data.json';
-// console.log(data);
 
 const MAP_CENTER = [25.03746, 121.564558];
 const MAP_ZOOM = 14;
@@ -40,10 +37,9 @@ export default function Map({ positions }) {
   const [mapCenter, setMapCenter] = useState(MAP_CENTER);
   const [mapZoom, setMapZoom] = useState(MAP_ZOOM);
   const [ubikePositions, setUbikePositions] = useState(positions);
-  const [searchData] = useState(initSearchData);
   const [markerTarget, setMarkerTarget] = useState(null);
   const [location, setLocation] = useState(null);
-
+  const [searchData] = useState(initSearchData);
   const mapRef = useRef();
 
   const handleDefaultMap = () => {
@@ -61,8 +57,6 @@ export default function Map({ positions }) {
         calculateDistance({ lat: latitude, lng: longitude }, positions);
         setMapCenter([latitude, longitude]);
         setLocation([latitude, longitude]);
-        // setMapCenter(MAP_CENTER); // 測試，可刪
-        // setLocation(MAP_CENTER); // 測試，可刪
         setMapZoom(16);
       });
     } else {
@@ -78,7 +72,7 @@ export default function Map({ positions }) {
     const searchPosition = positions.find((each) => each.sna.includes(value));
     if (searchPosition) {
       setMapCenter([searchPosition.latitude, searchPosition.longitude]);
-      setMapZoom(16);
+      setMapZoom(18);
       setUbikePositions(positions);
       setMarkerTarget(searchPosition);
       setLocation(null);
@@ -88,7 +82,7 @@ export default function Map({ positions }) {
   const changeCenter = (marker) => {
     setMarkerTarget(marker);
     setMapCenter([marker.latitude, marker.longitude]);
-    setMapZoom(16);
+    setMapZoom(18);
   };
 
   // calculate distance
@@ -142,7 +136,6 @@ export default function Map({ positions }) {
           smoothWheelZoom={false}
           smoothSensitivity={1}
           attributionControl={false}
-          onClick={() => console.log('###')}
         >
           <TileLayer url={TILE_LAYER_URL} />
           <MarkerClusterGroup>

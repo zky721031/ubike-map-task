@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Flex, Radio } from 'antd';
 import { LineChartOutlined, BarChartOutlined } from '@ant-design/icons';
+import './charts.css';
 
 import {
   LineChart,
